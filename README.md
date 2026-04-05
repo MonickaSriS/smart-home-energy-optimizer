@@ -107,7 +107,7 @@ Scores range from 0.0 to 1.0:
 ### Local Setup
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/smart-home-energy-optimizer
+git clone https://github.com/MonickaSriS/smart-home-energy-optimizer
 cd smart-home-energy-optimizer
 
 # Install dependencies
@@ -116,12 +116,7 @@ pip install -r requirements.txt
 # Validate environment
 openenv validate
 
-# Run baseline inference
-export OPENAI_API_KEY="your-key"
-export MODEL_NAME="gpt-4"
-export TASK="easy"
-python inference.py
-```
+
 
 ### Docker
 ```bash
