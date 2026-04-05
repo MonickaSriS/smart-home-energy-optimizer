@@ -1,3 +1,17 @@
+
+---
+title: Smart Home Energy Optimizer
+emoji: ⚡
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.29.0"
+python_version: "3.10"
+app_file: app.py
+pinned: false
+---
+
+
 # Smart Home Energy Optimizer
 
 An OpenEnv environment for training AI agents to optimize residential energy consumption through intelligent appliance scheduling, battery management, and solar integration.

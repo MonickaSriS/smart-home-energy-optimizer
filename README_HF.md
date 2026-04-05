@@ -60,5 +60,5 @@ curl -X POST https://Monickasri-smart-home-energy-optimizer.hf.space/step \
 
 Full documentation: [GitHub Repository](https://github.com/MonickaSriS/smart-home-energy-optimizer)
 
-## 🏆 Competition
+
 
