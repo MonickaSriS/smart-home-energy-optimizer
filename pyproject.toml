@@ -1,0 +1,17 @@
+[project]
+name = "smart-home-energy-optimizer"
+version = "0.1.0"
+description = "Smart Home Energy Management OpenEnv Environment"
+authors = [
+    { name="Your Name" }
+]
+dependencies = [
+    "pydantic",
+    "openenv-core>=0.2.0"
+]
+
+[project.scripts]
+server = "server.app:main"
+
+[tool.openenv]
+entry_point = "environment:SmartHomeEnergyEnv"

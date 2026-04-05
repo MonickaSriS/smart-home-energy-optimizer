@@ -1,0 +1,76 @@
+name: smart-home-energy-optimizer
+version: 1.0.0
+description: Train AI agents to optimize smart home energy usage by scheduling appliances, managing battery storage, and leveraging solar generation to minimize costs while maintaining comfort.
+author: YourName
+license: MIT
+
+environment:
+  class_path: environment.SmartHomeEnergyEnv
+  
+tasks:
+  - id: easy
+    name: Basic Appliance Scheduling
+    description: Schedule 3 major appliances (dishwasher, washing machine, EV charger) over 24 hours to minimize electricity costs using time-of-use pricing
+    difficulty: easy
+    max_steps: 96
+    success_threshold: 0.75
+    grader:
+      function: graders.grade_easy_task
+    
+  - id: medium
+    name: Multi-Device Solar Integration
+    description: Manage 10 home appliances with user comfort preferences while maximizing solar energy utilization
+    difficulty: medium
+    max_steps: 96
+    success_threshold: 0.65
+    grader:
+      function: graders.grade_medium_task
+    
+  - id: hard
+    name: Full Smart Home Optimization
+    description: Optimize 20 devices with battery storage, demand prediction, and dynamic pricing to achieve cost savings and grid independence
+    difficulty: hard
+    max_steps: 96
+    success_threshold: 0.55
+    grader:
+      function: graders.grade_hard_task
+
+observation_space:
+  type: object
+  description: Current state of the smart home energy system
+  properties:
+    timestamp:
+      type: string
+    time_step:
+      type: integer
+    appliances:
+      type: array
+    battery:
+      type: object
+    solar:
+      type: object
+    grid:
+      type: object
+    indoor_temperature:
+      type: number
+
+action_space:
+  type: object
+  description: Control commands for appliances and battery
+  properties:
+    appliance_actions:
+      type: array
+    battery_action:
+      type: object
+
+reward_space:
+  type: object
+  properties:
+    total:
+      type: number
+    cost_component:
+      type: number
+    comfort_component:
+      type: number
+    efficiency_component:
+      type: number
