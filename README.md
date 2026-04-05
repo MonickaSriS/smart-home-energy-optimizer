@@ -2,11 +2,11 @@
 
 An OpenEnv environment for training AI agents to optimize residential energy consumption through intelligent appliance scheduling, battery management, and solar integration.
 
-## 🎯 Overview
+##  Overview
 
 This environment simulates a smart home where an AI agent must minimize electricity costs while maintaining user comfort and completing necessary appliance cycles. The agent operates over a 24-hour period with 15-minute decision intervals.
 
-## 🏠 Environment Description
+##  Environment Description
 
 The agent controls:
 - **Appliances**: Dishwasher, washing machine, EV charger, HVAC, pool pump, etc.
@@ -20,9 +20,9 @@ Key challenges:
 - Battery state management
 - Solar generation variability
 
-## 📊 Tasks
+##  Tasks
 
-### Easy Task
+### Task 1
 **Objective**: Schedule 3 appliances to minimize cost
 
 - **Appliances**: Dishwasher, Washing Machine, EV Charger
@@ -30,7 +30,7 @@ Key challenges:
 - **Success**: Score ≥ 0.75
 - **Baseline**: ~0.82
 
-### Medium Task
+### Task 2
 **Objective**: Manage 10 devices with solar integration
 
 - **Appliances**: 10 devices including HVAC, pool pump, irrigation
@@ -38,7 +38,7 @@ Key challenges:
 - **Success**: Score ≥ 0.65
 - **Baseline**: ~0.71
 
-### Hard Task
+### Task 3
 **Objective**: Full home optimization with battery
 
 - **Appliances**: 20 devices across all home systems
@@ -46,7 +46,7 @@ Key challenges:
 - **Success**: Score ≥ 0.55
 - **Baseline**: ~0.62
 
-## 🎮 Action Space
+##  Action Space
 ```python
 Action(
     appliance_actions=[
@@ -60,7 +60,7 @@ Action(
 **Appliance Commands**: `ON`, `OFF`, `MAINTAIN`
 **Battery Commands**: `CHARGE`, `DISCHARGE`, `IDLE`
 
-## 👁️ Observation Space
+##  Observation Space
 ```python
 Observation(
     timestamp="14:30",
@@ -74,14 +74,14 @@ Observation(
 )
 ```
 
-## 🎁 Reward Structure
+##  Reward Structure
 
 - **Cost Component**: Negative reward proportional to electricity cost
 - **Comfort Component**: Penalty for temperature outside 68-72°F
 - **Efficiency Component**: Bonus for utilizing solar generation
 - **Constraint Penalty**: Penalty for missing deadlines or dependencies
 
-## 📈 Grading
+##  Grading
 
 Scores range from 0.0 to 1.0:
 
@@ -102,7 +102,7 @@ Scores range from 0.0 to 1.0:
 - 10% grid independence
 - 10% equipment longevity
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Local Setup
 ```bash
@@ -135,7 +135,7 @@ docker run -p 7860:7860 smart-home-energy
 curl -X POST http://localhost:7860/reset
 ```
 
-## 📊 Baseline Scores
+##  Baseline Scores
 
 | Task | Model | Score | Cost Savings |
 |------|-------|-------|--------------|
@@ -143,4 +143,17 @@ curl -X POST http://localhost:7860/reset
 | Medium | GPT-4 | 0.71 | 38% + solar |
 | Hard | GPT-4 | 0.62 | 52% + battery |
 
-## 🏗️ Project Structure
+##  Project Structure
+
+smart-home-energy-optimizer/
+├── models.py           # Pydantic data models
+├── environment.py      # Main OpenEnv environment
+├── appliances.py       # Appliance definitions
+├── pricing.py          # Electricity pricing logic
+├── solar.py           # Solar generation simulation
+├── graders.py         # Task grading functions
+├── inference.py       # Baseline agent
+├── openenv.yaml       # Environment configuration
+├── Dockerfile         # Container definition
+├── requirements.txt   # Python dependencies
+└── README.md          # This file
