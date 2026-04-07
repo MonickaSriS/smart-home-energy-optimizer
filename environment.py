@@ -32,7 +32,7 @@ class SmartHomeEnergyEnv:
         self.comfort_violations = 0
         self.indoor_temp = 70.0
     
-    async def reset(self) -> Observation:
+    def reset(self) -> Observation:
         """Initialize a new episode"""
         self.current_step = 0
         self.total_cost = 0.0
@@ -59,7 +59,7 @@ class SmartHomeEnergyEnv:
         
         return self._get_observation()
     
-    async def step(self, action: Action) -> Tuple[Observation, Reward, bool, Dict[str, Any]]:
+    def step(self, action: Action) -> Tuple[Observation, Reward, bool, Dict[str, Any]]:
         """Execute one time step"""
         hour, minute = self._get_current_time()
         dt = self.time_step_minutes / 60.0
@@ -154,7 +154,7 @@ class SmartHomeEnergyEnv:
         
         return obs, reward, done, info
     
-    async def state(self) -> Dict[str, Any]:
+    def state(self) -> Dict[str, Any]:
         """Return current state for evaluation"""
         hour, minute = self._get_current_time()
         
