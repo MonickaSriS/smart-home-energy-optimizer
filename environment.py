@@ -253,3 +253,7 @@ class SmartHomeEnergyEnv:
             efficiency_component=solar_bonus,
             feedback=f"Cost: ${cost:.3f}, Solar: {solar:.2f}kWh"
         )
+    
+    # Type aliases for compatibility
+EnergyAction = Action
+EnergyObservation = Observation

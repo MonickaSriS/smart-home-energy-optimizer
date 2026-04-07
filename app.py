@@ -1,5 +1,6 @@
 from openenv_core import create_app
-from environment import SmartHomeEnergyEnv, EnergyAction, EnergyObservation
+from environment import SmartHomeEnergyEnv
+from models import Action as EnergyAction, Observation as EnergyObservation
 
 
 def main():
