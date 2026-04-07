@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional, Literal
 from datetime import datetime, time
+from typing import List
 
 class Appliance(BaseModel):
     id: str
@@ -57,7 +58,7 @@ class Observation(BaseModel):
     
     # Comfort metrics
     indoor_temperature: float  # Current temp
-    target_temperature_range: tuple[float, float] = (68.0, 72.0)
+    target_temperature_range: List[float] = [68.0, 72.0]
     
     # Feedback
     last_action_cost: float = 0.0
