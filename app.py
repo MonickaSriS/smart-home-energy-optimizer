@@ -1,6 +1,7 @@
 from openenv_core import create_app
 from environment import SmartHomeEnergyEnv
 from models import Action as EnergyAction, Observation as EnergyObservation
+import uvicorn
 
 
 def main():
@@ -9,7 +10,8 @@ def main():
         EnergyAction,
         EnergyObservation
     )
-    app.run(host="0.0.0.0", port=8000)
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
 if __name__ == "__main__":
