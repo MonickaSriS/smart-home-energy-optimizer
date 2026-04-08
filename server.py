@@ -9,7 +9,6 @@ from models import Action
 
 app = FastAPI(title="Smart Home Energy Optimizer")
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,7 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Store active environments (in production, use proper state management)
 environments = {}
 
 class ResetRequest(BaseModel):
@@ -42,35 +40,36 @@ async def health():
 @app.post("/reset")
 async def reset(request: Optional[ResetRequest] = None):
     """Reset the environment"""
-    difficulty = request.difficulty if request else "easy"
+    difficulty = "easy"
+    if request and hasattr(request, 'difficulty'):
+        difficulty = request.difficulty
     
-    env = SmartHomeEnergyEnv(difficulty=difficulty)
-    observation = await env.reset()
-    
-    # Store environment (use session ID in production)
-    env_id = "default"
-    environments[env_id] = env
-    
-    return {
-        "observation": observation.dict(),
-        "info": {"difficulty": difficulty}
-    }
+    try:
+        env = SmartHomeEnergyEnv(difficulty=difficulty)
+        observation = await env.reset()
+        
+        env_id = "default"
+        environments[env_id] = env
+        
+        return {
+            "observation": observation.dict(),
+            "info": {"difficulty": difficulty}
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/step")
 async def step(request: StepRequest):
-    """Take a step in the environment"""
+    """Take a step"""
     env_id = "default"
     
     if env_id not in environments:
-        raise HTTPException(status_code=400, detail="Environment not initialized. Call /reset first")
+        raise HTTPException(status_code=400, detail="Call /reset first")
     
     env = environments[env_id]
     
     try:
-        # Parse action
         action = Action(**request.action)
-        
-        # Take step
         observation, reward, done, info = await env.step(action)
         
         return {
@@ -84,11 +83,11 @@ async def step(request: StepRequest):
 
 @app.get("/state")
 async def get_state():
-    """Get current environment state"""
+    """Get current state"""
     env_id = "default"
     
     if env_id not in environments:
-        raise HTTPException(status_code=400, detail="Environment not initialized. Call /reset first")
+        raise HTTPException(status_code=400, detail="Call /reset first")
     
     env = environments[env_id]
     state = await env.state()
